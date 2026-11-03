@@ -82,11 +82,11 @@ def decode_caption(data):
             continue
     else:
         body = data.decode("utf-8", errors="replace")
-    body = re.sub(r"(?is)<script\\b.*?</script>|<style\\b.*?</style>", "", body)
-    body = re.sub(r"(?i)<sync\\b[^>]*>", "\\n", body)
+    body = re.sub(r"(?is)<script\b.*?</script>|<style\b.*?</style>", "", body)
+    body = re.sub(r"(?i)<sync\b[^>]*>", "\n", body)
     body = re.sub(r"(?is)<[^>]+>", " ", body)
     body = html.unescape(body)
-    return "\\n".join(line.strip() for line in body.splitlines() if line.strip())
+    return "\n".join(line.strip() for line in body.splitlines() if line.strip())
 
 def get_named(api, folder, filename):
     results = [f for f in children(api, folder) if f["name"] == filename]
